@@ -1,0 +1,35 @@
+{
+  "name": "igloo",
+  "version": "0.0.1",
+  "description": "Igloo is a minimal app boilerplate built with Express.",
+  "main": "igloo.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/niftylettuce/igloo.git"
+  },
+  "author": "Nick Baugh <niftylettuce@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/niftylettuce/igloo/issues"
+  },
+  "bin": {
+    "igloo": "./bin/igloo"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/niftylettuce/igloo",
+  "dependencies": {
+    "passport": "~0.2.0",
+    "express-rate": "0.0.1",
+    "jade": "~1.1.5",
+    "express": "~3.4.8",
+    "mongoose": "~3.8.7",
+    "connect-redis": "~1.4.6",
+    "underscore": "~1.6.0",
+    "async": "~0.2.10",
+    "winston": "~0.7.2",
+    "mongoose-types": "~1.0.3",
+    "less-middleware": "~0.1.15",
+    "connect-flash": "~0.1.1",
+    "winston-mongodb": "~0.4.3",
+    "winston-request-logger": "~1.0.4"
+  }
+}
