@@ -12,9 +12,11 @@ module.exports = function(_lib, _app) {
 }
 
 function routes() {
-	
+
   var home = IoC.create('controllers/home')
 
   app.get('/', home.render)
   app.get('/about', home.about)
+
 }
+
