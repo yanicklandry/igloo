@@ -4,7 +4,7 @@
 var mongoose = require('mongoose')
 exports = module.exports = home
 
-function home(app, lib, modeluser) {
+function home(lib, settings) {
   return {
 
 	  render: function(req, res, next) {
@@ -12,16 +12,10 @@ function home(app, lib, modeluser) {
 	  },
 
 	  about: function(req, res, next) {
-      // save project data
-      var User = mongoose.model('User', modeluser);
-      console.log(modeluser);
-      User.create({name: 'john'}, function( err, project ) {
-        res.send(200, 'Hello, this is Igloo.')
-      });
-
+      res.send(200, 'Hello, this is Igloo.')
 	  }
 
 	}
 }
 
-exports['@require'] = [ 'mongo', 'redis', 'models/user' ];
+exports['@require'] = [ 'lib', 'settings' ];

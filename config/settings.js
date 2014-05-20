@@ -6,8 +6,6 @@ var config = require('./index');
 
 /**
  * Initialize settings.
- *
- * This component configures the application's settings.
  */
 exports = module.exports = function(lib, app) {
   var settings = new Settings(config);
@@ -21,6 +19,9 @@ exports = module.exports = function(lib, app) {
 exports['@singleton'] = true;
 
 
+/**
+ * Settings component
+ */
 
 function Settings(initial) {
   if(initial)

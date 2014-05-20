@@ -2,7 +2,6 @@
 // # routes
 
 var IoC = require('electrolyte')
-
 var lib, app
 
 
@@ -13,8 +12,7 @@ module.exports = function(_lib, _app) {
 }
 
 function routes() {
-  var self = app;
-
+	
   var home = IoC.create('controllers/home')
 
   app.get('/', home.render)

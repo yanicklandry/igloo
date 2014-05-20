@@ -16,6 +16,7 @@ var errorHandler = require('errorhandler')
 var serveFavicon = require('serve-favicon')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
+var dataNode = require('../lib/dataNode')
 
 
 module.exports = function(lib, callback) {
@@ -35,7 +36,10 @@ module.exports = function(lib, callback) {
   ioc.loader('controllers', ioc.node('app/controllers'));
   ioc.loader('models', ioc.node('app/models'));
   ioc.loader(ioc.node('config'));
-  ioc.loader(ioc.node('lib'));
+
+  // set-up data nodes (inject data)
+  ioc.loader(dataNode(lib, 'lib'));
+  ioc.loader(dataNode(app, 'app'));
 
   // set the default views directory
   app.set('views', lib.config.viewsDir)
@@ -88,10 +92,11 @@ module.exports = function(lib, callback) {
   app.use(express.static(lib.config.publicDir, lib.config.staticServer))
 
   // error handling
-  //app.use(express.errorHandler())
   app.use(errorHandler())
 
 
   callback(null, app)
 
+  return {app: app, lib: lib}
 }
+
