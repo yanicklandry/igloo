@@ -34,10 +34,9 @@
     "electrolyte": "*",
     "express-session": "~1.1.0",
     "method-override": "~1.0.1",
-    "static-favicon": "~2.0.0-alpha",
     "cookie-parser": "~1.1.0",
     "errorhandler": "~1.0.1",
     "body-parser": "~1.2.0",
-    "serve-favicon": "^2.0.0"
+    "serve-favicon": "~2.0.0"
   }
 }

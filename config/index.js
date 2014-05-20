@@ -18,7 +18,7 @@ var environments = {
     host: 'localhost',
     db: {
       host: 'localhost',
-      dbname: 'TODO',
+      dbname: 'mydb',
       port: '27017',
       opts: {}
     },
