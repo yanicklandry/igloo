@@ -2,7 +2,6 @@
 // # auth
 
 var passport = require('passport')
-
 var lib, app
 
 module.exports = function(_lib, _app) {
@@ -32,3 +31,7 @@ function deserializeUser(id, done) {
     done(err, user)
   })
 }
+
+
+ 
+

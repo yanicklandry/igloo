@@ -1,16 +1,16 @@
 
 // # user
 
-var mongoose = require('mongoose')
-var common = require('./common')
+var mongoose = require('mongoose'),
+    common = require('./common'),
+    Schema = mongoose.Schema,
+    mongooseTypes = require('mongoose-types')
 
-var Schema = mongoose.Schema
-var mongooseTypes = require('mongoose-types')
 mongooseTypes.loadTypes(mongoose)
 
 var Email = mongoose.SchemaTypes.Email
 
-var User = module.exports = new Schema({
+var User = new Schema({
   email: {
     type: Email,
     required: true,
@@ -19,3 +19,5 @@ var User = module.exports = new Schema({
 })
 
 User.plugin(common)
+
+module.exports = User;

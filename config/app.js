@@ -7,7 +7,17 @@ var dynamicHelpers = require('./dynamic-helpers')
 var development = require('./development')
 var production = require('./production')
 var auth = require('./auth')
+var settings = require('./settings')
 var routes = require('./routes')
+var ioc = require('electrolyte')
+var session = require('express-session')
+var methodOverride = require('method-override')
+var errorHandler = require('errorhandler')
+var serveFavicon = require('serve-favicon')
+var cookieParser = require('cookie-parser')
+var bodyParser = require('body-parser')
+var dataNode = require('../lib/dataNode')
+
 
 module.exports = function(lib, callback) {
 
@@ -22,6 +32,15 @@ module.exports = function(lib, callback) {
   // trust proxy
   app.enable('trust proxy')
 
+  // set-up electrolyte
+  ioc.loader('controllers', ioc.node('app/controllers'));
+  ioc.loader('models', ioc.node('app/models'));
+  ioc.loader(ioc.node('config'));
+
+  // set-up data nodes (inject data)
+  ioc.loader(dataNode(lib, 'lib'));
+  ioc.loader(dataNode(app, 'app'));
+
   // set the default views directory
   app.set('views', lib.config.viewsDir)
 
@@ -32,27 +51,31 @@ module.exports = function(lib, callback) {
   app.locals.pretty = true
 
   // ignore GET /favicon.ico
-  app.use(express.favicon(lib.config.favicon))
+  app.use(serveFavicon(lib.config.favicon))
 
   // development only config
-  app.configure('development', development(lib, app))
+  switch(lib.config.env){
+  case 'development':
+    development(lib, app);
+    break;
 
-  // production only config
-  app.configure('production', production(lib, app))
+  case 'production':
+    production(lib, app)
+    break;
+  }
 
   // pass a secret to cookieParser() for signed cookies
-  app.use(express.cookieParser(lib.config.cookieParser))
+  app.use(cookieParser(lib.config.cookieParser))
 
   // parse request bodies
-  app.use(express.json())
-  app.use(express.urlencoded())
+  app.use(bodyParser())
 
   // support _method (PUT in forms etc)
-  app.use(express.methodOverride())
+  app.use(methodOverride())
 
   // add req.session cookie support
-  app.use(express.session(lib.config.session))
-
+  app.use(session(lib.config.session))
+  
   // add flash message support
   app.use(flash())
 
@@ -60,20 +83,20 @@ module.exports = function(lib, callback) {
   app.use(dynamicHelpers)
 
   // add support for authentication
-  app.configure(auth(lib, app))
+  auth(lib, app)()
 
   // load the routes
-  app.configure(routes(lib, app))
-
-  // make the middleware order matter
-  app.use(app.router)
+  routes(lib, app)()
 
   // static server
   app.use(express.static(lib.config.publicDir, lib.config.staticServer))
 
   // error handling
-  app.use(express.errorHandler())
+  app.use(errorHandler())
+
 
   callback(null, app)
 
+  return {app: app, lib: lib}
 }
+

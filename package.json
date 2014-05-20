@@ -20,9 +20,9 @@
     "passport": "~0.2.0",
     "express-rate": "0.0.1",
     "jade": "~1.1.5",
-    "express": "~3.4.8",
+    "express": "~4.2.0",
     "mongoose": "~3.8.7",
-    "connect-redis": "~1.4.6",
+    "connect-redis": "~2.0.0",
     "underscore": "~1.6.0",
     "async": "~0.2.10",
     "winston": "~0.7.2",
@@ -30,6 +30,13 @@
     "less-middleware": "~0.1.15",
     "connect-flash": "~0.1.1",
     "winston-mongodb": "~0.4.3",
-    "winston-request-logger": "~1.0.4"
+    "winston-request-logger": "~1.0.4",
+    "electrolyte": "*",
+    "express-session": "~1.1.0",
+    "method-override": "~1.0.1",
+    "cookie-parser": "~1.1.0",
+    "errorhandler": "~1.0.1",
+    "body-parser": "~1.2.0",
+    "serve-favicon": "~2.0.0"
   }
 }
