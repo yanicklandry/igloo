@@ -3,7 +3,6 @@
 
 var express = require('express')
 var flash = require('connect-flash')
-var dynamicHelpers = require('./dynamic-helpers')
 var development = require('./development')
 var production = require('./production')
 var passport = require('passport')
