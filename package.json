@@ -12,13 +12,15 @@
     "url": "https://github.com/niftylettuce/igloo/issues"
   },
   "bin": {
-    "igloo": "./bin/igloo"
+    "igloo": "./bin/"
   },
   "license": "MIT",
   "homepage": "https://github.com/niftylettuce/igloo",
   "dependencies": {
     "async": "~0.2.10",
     "body-parser": "~1.2.0",
+    "chalk": "^0.4.0",
+    "commander": "^2.2.0",
     "connect-flash": "~0.1.1",
     "connect-redis": "~2.0.0",
     "cookie-parser": "~1.1.0",

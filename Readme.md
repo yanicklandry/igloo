@@ -8,49 +8,24 @@ Igloo is a lightweight, fast, and minimal framework for rapid development
 View documentation for Igloo at <http://documentup.com/niftylettuce/igloo>.
 
 
-## Quick Start
-
-### Requirements
+## Dependencies
 
 * [Node](http://nodejs.org)
 * [Redis](http://redis.io/)
 * [MongoDB](http://www.mongodb.org/)
 
-### Installation
 
-* Install the `igloo` package globally from the NPM repository:
+## Install
 
 ```bash
 npm install -g igloo
 ```
 
-* Create a new igloo:
+
+## Usage
 
 ```bash
-igloo [project]
-```
-
-* Initialize it as a Git repository:
-
-```bash
-cd [project]
-git init
-```
-
-* Install the NPM dependencies:
-
-```bash
-npm install
-```
-
-* Enjoy your fresh new igloo.
-
-```bash
-node igloo
-```
-
-```bash
-info: Igloo started at http://localhost:3000
+igloo --help
 ```
 
 
