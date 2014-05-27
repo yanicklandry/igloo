@@ -34,6 +34,6 @@ if (!module.parent)
   igloo(function(err, app) {
     if (err) return lib.logger.error(err)
     app.listen(config.port, function() {
-      lib.logger.info('Igloo started at %s://%s:%d', config.protocol, config.host, config.port)
+      lib.logger.info('igloo started at %s://%s:%d', config.protocol, config.host, config.port)
     })
   })

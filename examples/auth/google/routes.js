@@ -1,49 +1,21 @@
-/**
- * Add following code to routes() function in
- * your ./config/routes.js file.
- */
+
+// # examples - auth - google
+
+/*globals app,lib*/
+
+// Add to `config/routes.js`:
 
 var passport = require('passport')
+var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn
+var ensureLoggedOut = require('connect-ensure-login').ensureLoggedOut
 
-// auth route
-
-app.get('/auth/google', function(req,res,next) { 
-		// add remember me details etc. here
-   	next()
-  },
-  passport.authenticate('google', { failureRedirect: '/', failureFlash: true }),
-  function(req, res) {
-  	res.redirect('/')
-  });
-
-// auth callback
-
-app.get('/auth/google/callback',
-  passport.authenticate( 'google', {
-    failureRedirect: '/'
-  }),
-  function(req, res, next) {
-    var redirectTo = req.session.redirectTo;
-
-    // Successful authentication, redirect to dashboard page.
-    if ( redirectTo ) {
-        req.session.redirectTo = null
-        res.redirect(redirectTo)
-    } else {
-        res.redirect('/logged-in')
-    }
-  }
-);
-
-// log out
-
-app.get('/logout', function(req, res){
-  req.logout()
-  res.redirect('/')
-});
-
-// sample log-in message
-
-app.get('/logged-in', function(req, res){
-  req.send(200, 'Hey!')
-});
+// google oauth
+app.get('/auth/google', ensureLoggedOut(), passport.authenticate('google', {
+  scope: lib.config.google.scope
+}))
+app.get('/auth/google/callback', ensureLoggedOut(), passport.authenticate('google', {
+  successFlash: true,
+  successReturnToOrRedirect: '/',
+  failureFlash: true,
+  failureRedirect: '/login'
+}))

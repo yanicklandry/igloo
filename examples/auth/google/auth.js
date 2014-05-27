@@ -1,48 +1,39 @@
-/**
- * Add following code to auth() function in
- * ./config/auth.js
- *
- * It's better to keep 'returnURL' and 'realm'
- * in settings.
- */
 
+// # examples - auth - google
 
-var GoogleStrategy = require('passport-google').Strategy
+/*globals lib*/
 
-passport.use( new GoogleStrategy({
-    returnURL: 'http://localhost:3000/auth/google/callback',
-    realm: 'http://localhost:3000',
-    passReqToCallback: true
-  },
-  function(req, identifier, profile, done) {
+// Add to `config/app.js`:
 
-    var email = profile.emails[ 0 ].value
-    var User = lib.db.model('User')
+var randomstring = require('randomstring-extended')
+var passport = require('passport')
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
-    // save user
-    User.findOne({
-        email: email
-    }, function( err, user ) {
+passport.use(new GoogleStrategy({
+  callbackURL: lib.config.url + '/auth/google/callback',
+  clientID: lib.config.google.clientID,
+  clientSecret: lib.config.google.clientSecret
+}, authCallback))
 
-      if (!user) {
-        User.create({
-          email: email,
-          name: profile.displayName,
-        }, function(err, user) {
+function authCallback(token, tokenSecret, profile, done) {
 
-          // Update lastToken
-          user.lastToken = identifier
-          user.save()
-          return done( err, user )
-        });
+  lib.db.model('User').findOne({
+    email: profile._json.email
+  }, findUserByEmail)
 
-      } else {
-        // Update lastToken
-        user.lastToken = identifier
-        user.save()
-        return done( err, user )
-      }
-      
-    });
+  function findUserByEmail(err, user) {
+    if (err) return done(err)
+    if (user) return done(null, user)
+    user = {
+      email: profile._json.email,
+      name: profile.name.givenName,
+      surname: profile.name.familyName
+    }
+    if (profile.provider === 'google') {
+      user.google_access_token = token
+      user.avatar_url = profile._json.picture
+    }
+    lib.db.model('User').register(user, randomstring.token(), findUserByEmail)
   }
-));
+
+}

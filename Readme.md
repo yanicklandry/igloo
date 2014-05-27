@@ -3,7 +3,7 @@
 
 ![Igloo](https://filenode.s3.amazonaws.com/igloo.png)
 
-Igloo is a minimal app boilerplate built with Express.
+Igloo is a lightweight, fast, and minimal framework for rapid development
 
 View documentation for Igloo at <http://documentup.com/niftylettuce/igloo>.
 
@@ -18,7 +18,7 @@ View documentation for Igloo at <http://documentup.com/niftylettuce/igloo>.
 
 ### Installation
 
-* Install the `igloo` package from the NPM repository:
+* Install the `igloo` package globally from the NPM repository:
 
 ```bash
 npm install -g igloo
@@ -57,6 +57,7 @@ info: Igloo started at http://localhost:3000
 ## Contributors
 
 * Nick Baugh <niftylettuce@gmail.com>
+* Sandaruwan Silva <c-h@users.sf.net>
 
 
 ## Credits

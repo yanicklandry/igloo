@@ -1,12 +1,12 @@
 
-// # app
+// # config - app
 
 var express = require('express')
 var flash = require('connect-flash')
 var dynamicHelpers = require('./dynamic-helpers')
 var development = require('./development')
 var production = require('./production')
-var auth = require('./auth')
+var passport = require('passport')
 var settings = require('./settings')
 var routes = require('./routes')
 var ioc = require('electrolyte')
@@ -16,8 +16,8 @@ var errorHandler = require('errorhandler')
 var serveFavicon = require('serve-favicon')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
-var dataNode = require('../lib/dataNode')
-
+var dataNode = require('../lib/data-node')
+var helmet = require('helmet')
 
 module.exports = function(lib, callback) {
 
@@ -50,18 +50,20 @@ module.exports = function(lib, callback) {
   // make jade pretty
   app.locals.pretty = true
 
+  // use helmet for security
+  app.use(helmet.defaults())
+
   // ignore GET /favicon.ico
   app.use(serveFavicon(lib.config.favicon))
 
-  // development only config
+  // environment configs
   switch(lib.config.env){
   case 'development':
-    development(lib, app);
-    break;
-
+    development(lib, app)
+    break
   case 'production':
     production(lib, app)
-    break;
+    break
   }
 
   // pass a secret to cookieParser() for signed cookies
@@ -75,15 +77,28 @@ module.exports = function(lib, callback) {
 
   // add req.session cookie support
   app.use(session(lib.config.session))
-  
+
   // add flash message support
   app.use(flash())
 
   // add dynamic helpers for views
-  app.use(dynamicHelpers)
+  app.use(function(req, res, next) {
+    res.locals.req = req
+    res.locals.messages = {
+      success: req.flash('success'),
+      error: req.flash('error'),
+      info: req.flash('info'),
+      warning: req.flash('warning')
+    }
+    next()
+  })
 
   // add support for authentication
-  auth(lib, app)()
+  app.use(passport.initialize())
+  app.use(passport.session())
+  passport.use(lib.db.model('User').createStrategy())
+  passport.serializeUser(lib.db.model('User').serializeUser())
+  passport.deserializeUser(lib.db.model('User').deserializeUser())
 
   // load the routes
   routes(lib, app)()
@@ -94,9 +109,12 @@ module.exports = function(lib, callback) {
   // error handling
   app.use(errorHandler())
 
-
   callback(null, app)
 
-  return {app: app, lib: lib}
+  return {
+    app: app,
+    lib: lib
+  }
+
 }
 
