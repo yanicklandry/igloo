@@ -1,39 +1,74 @@
 
 // # Igloo
 
-var async = require('async')
-var config = require('./config')
-var schemas = require('./schemas')
-var lib = require('./lib')(config)
-var app = require('./config/app')
+var path = require('path')
+var IoC = require('electrolyte')
+var os = require('os')
+var cluster = require('cluster')
 
-module.exports = igloo
+IoC.loader(IoC.node(path.join(__dirname, 'lib')))
 
-function igloo(callback) {
+//
+// Inspired by `bixby-express` and Jared Hanson
+//
 
-  async.parallel({
-    db: lib.mongo,
-    sessions: lib.redis
-  }, loadConnections)
+var logger = IoC.create('logger')
+var settings = IoC.create('settings')
+var app = IoC.create('app')
 
-  function loadConnections(err, connections) {
-    if (err) return callback(err)
-    lib.db = connections.db
-    lib.config.session.store = lib.sessions = connections.sessions
-    schemas(lib, loadSchemas)
+exports = module.exports = app
+
+if (cluster.isMaster && settings.server.clusterEnabled) {
+
+  var clusterSize = settings.server.clusterSize || os.cpus().length
+
+  logger.info('creating cluster with %d workers', clusterSize)
+
+  for (var i=0; i<clusterSize; i++) {
+    logger.info('spawning worker #%d', i + 1)
+    cluster.fork()
   }
 
-  function loadSchemas(err, lib) {
-    if (err) return callback(err)
-    app(lib, callback)
-  }
+  cluster.on('fork', function(worker) {
+    logger.info('worker #%s with pid %d spawned', worker.id, worker.process.pid)
+  })
+
+  cluster.on('online', function(worker) {
+    logger.info('worker #%s with pid %d online', worker.id, worker.process.pid)
+  })
+
+  cluster.on('listening', function(worker, addr) {
+    logger.info('worker #%s with pid %d listening on %s:%d', worker.id, worker.process.pid, addr.address, addr.port)
+  })
+
+  cluster.on('disconnect', function(worker) {
+    logger.info('worker #%s with pid %d disconnected', worker.id, worker.process.pid)
+  })
+
+  cluster.on('exit', function(worker, code, signal) {
+    logger.error('worker #%s with pid %d exited with code/signal', worker.id, worker.process.pid, signal || code)
+    if (worker.suicide) return
+    logger.info('worker #%s restarting', worker.id)
+    cluster.fork()
+  })
+
+} else {
+
+  app.boot(function(err) {
+
+    if (err) {
+      logger.error(err)
+      process.exit(0)
+      return
+    }
+
+    logger.info('app booted')
+
+    app.listen(settings.server.port, settings.server.host, function() {
+      var addr = this.address()
+      logger.info('app listening on %s:%d', addr.address, addr.port)
+    })
+
+  })
 
 }
-
-if (!module.parent)
-  igloo(function(err, app) {
-    if (err) return lib.logger.error(err)
-    app.listen(config.port, function() {
-      lib.logger.info('igloo started at %s://%s:%d', config.protocol, config.host, config.port)
-    })
-  })
