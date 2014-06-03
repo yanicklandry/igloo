@@ -33,6 +33,7 @@
     "express-session": "~1.1.0",
     "jade": "~1.1.5",
     "less-middleware": "~0.1.15",
+    "merge-defaults": "^0.1.0",
     "method-override": "~1.0.1",
     "mongoose": "~3.8.7",
     "mongoose-json-select": "^0.2.1",
