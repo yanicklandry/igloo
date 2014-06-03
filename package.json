@@ -42,7 +42,7 @@
     "passport-local-mongoose": "^0.3.0",
     "serve-favicon": "~2.0.0",
     "underscore": "~1.6.0",
-    "winston": "~0.7.2",
+    "winston": "git://github.com/niftylettuce/winston",
     "winston-mongodb": "~0.4.3",
     "winston-request-logger": "~1.0.4"
   }
