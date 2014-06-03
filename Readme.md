@@ -3,7 +3,7 @@
 
 ![Igloo](https://filenode.s3.amazonaws.com/igloo.png)
 
-Igloo is a lightweight, fast, and minimal framework for rapid development
+Igloo is a lightweight, fast, and minimal framework for rapid development.
 
 View documentation for Igloo at <http://documentup.com/niftylettuce/igloo>.
 
@@ -15,24 +15,19 @@ View documentation for Igloo at <http://documentup.com/niftylettuce/igloo>.
 * [MongoDB](http://www.mongodb.org/)
 
 
-## Install
+## Reference
+
+Please use [`eskimo`](https://github.com/niftylettuce/eskimo) in order to build an `igloo`.
 
 ```bash
-npm install -g igloo
-```
-
-
-## Usage
-
-```bash
-igloo --help
+npm install -g eskimo
+eskimo --help
 ```
 
 
 ## Contributors
 
 * Nick Baugh <niftylettuce@gmail.com>
-* Sandaruwan Silva <c-h@users.sf.net>
 
 
 ## Credits

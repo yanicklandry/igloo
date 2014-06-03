@@ -1,8 +1,8 @@
 {
   "name": "igloo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Igloo is a lightweight, fast, and minimal framework for rapid development",
-  "main": "igloo.js",
+  "main": "./index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/niftylettuce/igloo.git"
@@ -10,9 +10,6 @@
   "author": "Nick Baugh <niftylettuce@gmail.com>",
   "bugs": {
     "url": "https://github.com/niftylettuce/igloo/issues"
-  },
-  "bin": {
-    "igloo": "./bin/"
   },
   "license": "MIT",
   "homepage": "https://github.com/niftylettuce/igloo",
@@ -26,7 +23,6 @@
     "connect-flash": "~0.1.1",
     "connect-redis": "~2.0.0",
     "cookie-parser": "~1.1.0",
-    "electrolyte": "*",
     "errorhandler": "~1.0.1",
     "express": "~4.2.0",
     "express-rate": "0.0.1",
