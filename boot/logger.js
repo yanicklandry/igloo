@@ -40,6 +40,7 @@ exports = module.exports = function(settings) {
     transports: transports
   })
 
+
   return logger
 
 }

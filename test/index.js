@@ -1,4 +1,0 @@
-
-// # test
-
-var igloo = require('../')

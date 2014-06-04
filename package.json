@@ -25,10 +25,6 @@
     "cookie-parser": "~1.1.0",
     "errorhandler": "~1.0.1",
     "express": "~4.2.0",
-    "express-rate": "0.0.1",
-    "express-session": "~1.1.0",
-    "jade": "~1.1.5",
-    "less-middleware": "~0.1.15",
     "merge-defaults": "^0.1.0",
     "method-override": "~1.0.1",
     "mongoose": "~3.8.7",
@@ -38,8 +34,9 @@
     "passport-local-mongoose": "^0.3.0",
     "serve-favicon": "~2.0.0",
     "underscore": "~1.6.0",
+    "update-notifier": "^0.1.8",
     "winston": "git://github.com/niftylettuce/winston",
     "winston-mongodb": "~0.4.3",
-    "winston-request-logger": "~1.0.4"
+    "winston-request-logger": "^1.0.5"
   }
 }
