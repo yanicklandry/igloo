@@ -2,33 +2,35 @@
 // # app
 
 var express = require('express')
-var updateNotifier = require('update-notifier')
 var winstonRequestLogger = require('winston-request-logger')
 var bootable = require('bootable')
 var bootableEnvironment = require('bootable-environment')
+var _ = require('underscore')
+var updateNotifier = require('update-notifier')
 var path = require('path')
-var pkg = require(path.join(__dirname, '..', 'package'))
 
 exports = module.exports = function(logger, settings) {
 
-  // check for updates to igloo
-  if (settings.updateNotifier) {
-
-    var notifier = updateNotifier({
-      packageName: pkg.name,
-      packageVersion: pkg.version
-    })
-
-    if (notifier.update)
+  // check for updates to all packages when not in production
+  if (settings.updateNotifier.enabled)
+    _.each(settings.pkg.dependencies, function(version, name) {
+      var notifier = updateNotifier({
+        packageName: name,
+        packageVersion: version,
+        optOut: settings.updateNotifier.dependencies[name] || false,
+        updateCheckInterval: settings.updateNotifier.updateCheckInterval | 1000 * 60 * 60, // hourly
+        updateCheckTimeout: settings.updateNotifier.updateCheckTimeout | 1000 * 20 // 20 seconds
+      })
+      if (_.isUndefined(notifier.update)) return
       logger.warn(
-        'v%s of %s is now available (current: %s), run `npm update %s` to upgrade',
+        '%s of %s released (current: %s), run `npm install -S %s@%s` to upgrade',
         notifier.update.latest,
-        pkg.version,
-        pkg.name,
-        pkg.name
+        name,
+        version,
+        name,
+        notifier.update.latest
       )
-
-  }
+    })
 
   // create the app
   var app = bootable(express())
