@@ -31,15 +31,6 @@ module.exports = function(lib, callback) {
   // trust proxy
   app.enable('trust proxy')
 
-  // set-up electrolyte
-  ioc.loader('controllers', ioc.node('app/controllers'));
-  ioc.loader('models', ioc.node('app/models'));
-  ioc.loader(ioc.node('config'));
-
-  // set-up data nodes (inject data)
-  ioc.loader(dataNode(lib, 'lib'));
-  ioc.loader(dataNode(app, 'app'));
-
   // set the default views directory
   app.set('views', lib.config.viewsDir)
 

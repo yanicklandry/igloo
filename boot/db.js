@@ -1,7 +1,8 @@
 
-// # mongo
+// # db
 
 var mongoose = require('mongoose')
+var _ = require('underscore')
 
 exports = module.exports = function(logger, settings) {
 

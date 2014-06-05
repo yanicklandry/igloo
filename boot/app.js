@@ -4,10 +4,10 @@
 var express = require('express')
 var winstonRequestLogger = require('winston-request-logger')
 var bootable = require('bootable')
-var bootableEnvironment = require('bootable-environment')
 var _ = require('underscore')
 var updateNotifier = require('update-notifier')
 var path = require('path')
+var Resource = require('express-resource')
 
 exports = module.exports = function(logger, settings) {
 
@@ -39,10 +39,6 @@ exports = module.exports = function(logger, settings) {
   // but only if it was enabled in settings
   if (settings.logger.requests)
     app.use(winstonRequestLogger.create(logger))
-
-  app.phase(bootableEnvironment())
-  app.phase(bootable.initializers())
-  app.phase(bootable.routes())
 
   return app
 
