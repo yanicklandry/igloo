@@ -14,8 +14,10 @@ exports = module.exports = function(logger, settings) {
     if (!_.isString(err.message))
       err.message = 'An unknown error has occured, please try again'
 
-    if (_.isObject(err) && _.isNumber(err.code) && err.code === 11000)
+    if (_.isObject(err) && _.isNumber(err.code) && err.code === 11000) {
       err.message = 'Duplicate document already exists in database, try making a more unique value'
+      err.param = ''
+    }
 
     // if we pass an error object, then we want to simply return the message...
     // if we pass an object, then we want to do a stack trace, and then return the object + stack
