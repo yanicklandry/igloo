@@ -25,6 +25,19 @@ eskimo --help
 ```
 
 
+## Components
+
+Using `electrolyte`, you an inject the following dependencies into your app with `eskimo`:
+
+* `app` - returns an instance of `express()`
+* `error-handler` - returns an error handler that can be used via `app.use`
+* `db` - returns connection to MongoDB
+* `logger` - returns a Winston logger instance
+* `model-common-plugin` - returns a Mongoose plugin for common schema paths
+* `sessions` - returns connection to Redis
+* `settings` - returns config
+
+
 ## Contributors
 
 * Nick Baugh <niftylettuce@gmail.com>
