@@ -15,8 +15,13 @@ exports = module.exports = function(logger, settings) {
       err.message = 'An unknown error has occured, please try again'
 
     if (_.isObject(err) && _.isNumber(err.code) && err.code === 11000) {
-      err.message = 'Duplicate document already exists in database, try making a more unique value'
-      err.param = ''
+      // <https://github.com/LearnBoost/mongoose/issues/2129>
+      var field = err.message.split('index: test.')[1].split('.$')[1]
+      // now we have `email_1 dup key`
+      field = field.split(' dup key')[0]
+      field = field.substring(0, field.lastIndexOf('_'))
+      err.message = util.format('Duplicate %s already exists in database, try making a more unique value', field)
+      err.param = field
     }
 
     // if we pass an error object, then we want to simply return the message...
