@@ -15,6 +15,11 @@ exports = module.exports = function(settings) {
       created_at: Date
     })
 
+    if (settings.mongooseVersioning)
+      Schema.add({
+        __versions: []
+      })
+
     Schema.pre('save', function(next) {
 
       var that = this
