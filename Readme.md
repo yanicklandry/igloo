@@ -5,8 +5,7 @@
 
 Igloo is a lightweight, fast, and minimal framework for rapid development.
 
-View documentation for Igloo at <http://documentup.com/niftylettuce/igloo>.
-
+View documentation for Igloo at <http://igloojs.com>.
 
 ## Dependencies
 
