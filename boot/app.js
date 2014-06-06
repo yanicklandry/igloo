@@ -7,7 +7,7 @@ var bootable = require('bootable')
 var _ = require('underscore')
 var updateNotifier = require('update-notifier')
 var path = require('path')
-var Resource = require('express-resource')
+var expressResource = require('express-resource')
 
 exports = module.exports = function(logger, settings) {
 
@@ -21,7 +21,7 @@ exports = module.exports = function(logger, settings) {
         updateCheckInterval: settings.updateNotifier.updateCheckInterval | 1000 * 60 * 60, // hourly
         updateCheckTimeout: settings.updateNotifier.updateCheckTimeout | 1000 * 20 // 20 seconds
       })
-      if (_.isUndefined(notifier.update)) return
+      if (_.isUndefined(notifier.update) || !_.isString(notifier.update.latest)) return
       logger.warn(
         '%s of %s released (current: %s), run `npm install -S %s@%s` to upgrade',
         notifier.update.latest,
@@ -39,6 +39,9 @@ exports = module.exports = function(logger, settings) {
   // but only if it was enabled in settings
   if (settings.logger.requests)
     app.use(winstonRequestLogger.create(logger))
+
+  // integrate express-resource
+  app = expressResource(app)
 
   return app
 

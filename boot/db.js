@@ -3,6 +3,7 @@
 
 var mongoose = require('mongoose')
 var _ = require('underscore')
+var mongooseTypes = require('nifty-mongoose-types')
 
 exports = module.exports = function(logger, settings) {
 
@@ -18,6 +19,11 @@ exports = module.exports = function(logger, settings) {
   connection.on('open', function() {
     logger.info('mongo connection opened')
   })
+
+  connection.Schema = mongoose.Schema
+  connection.SchemaTypes = mongoose.SchemaTypes
+  connection.Types = mongoose.SchemaTypes
+  mongooseTypes.loadTypes(connection)
 
   return connection
 
