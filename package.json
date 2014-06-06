@@ -26,6 +26,7 @@
     "nifty-mongoose-types": "0.0.2",
     "to-camel-case": "^0.2.1",
     "underscore": "~1.6.0",
+    "update-notifier": "git://github.com/niftylettuce/update-notifier",
     "winston": "git://github.com/niftylettuce/winston",
     "winston-mongodb": "~0.4.3",
     "winston-request-logger": "^1.0.5"
