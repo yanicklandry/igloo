@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>error-handler.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="db.html">
+                db.js
+              </a>
+            
+              
+              <a class="source" href="error-handler.html">
+                error-handler.js
+              </a>
+            
+              
+              <a class="source" href="logger.html">
+                logger.js
+              </a>
+            
+              
+              <a class="source" href="mongoose-plugin.html">
+                mongoose-plugin.js
+              </a>
+            
+              
+              <a class="source" href="server.html">
+                server.js
+              </a>
+            
+              
+              <a class="source" href="sessions.html">
+                sessions.js
+              </a>
+            
+              
+              <a class="source" href="settings.html">
+                settings.js
+              </a>
+            
+              
+              <a class="source" href="update-notifier.html">
+                update-notifier.js
+              </a>
+            
+              
+              <a class="source" href="index.html">
+                index.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>error-handler.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h1 id="boot-error-handler">boot - error handler</h1>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'underscore'</span>)
+<span class="hljs-keyword">var</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>)
+
+exports = module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(logger, settings)</span> {</span>
+
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+
+    <span class="hljs-keyword">var</span> app = <span class="hljs-keyword">this</span>
+
+    app.use(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err, req, res, next)</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>set default error status code</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      res.statusCode = (_.isNumber(err.status)) ? err.status : <span class="hljs-number">500</span>
+
+      <span class="hljs-keyword">if</span> (!_.isString(err.message))
+        err.message = <span class="hljs-string">'An unknown error has occured, please try again'</span>
+
+      <span class="hljs-keyword">if</span> (_.isObject(err) &amp;&amp; _.isNumber(err.code) &amp;&amp; err.code === <span class="hljs-number">11000</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p><a href="https://github.com/LearnBoost/mongoose/issues/2129">https://github.com/LearnBoost/mongoose/issues/2129</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> field = err.message.split(<span class="hljs-string">'index: test.'</span>)[<span class="hljs-number">1</span>].split(<span class="hljs-string">'.$'</span>)[<span class="hljs-number">1</span>]</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>now we have <code>email_1 dup key</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        field = field.split(<span class="hljs-string">' dup key'</span>)[<span class="hljs-number">0</span>]
+        field = field.substring(<span class="hljs-number">0</span>, field.lastIndexOf(<span class="hljs-string">'_'</span>))
+        err.message = util.format(<span class="hljs-string">'Duplicate %s already exists in database, try making a more unique value'</span>, field)
+        err.param = field
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>if we pass an error object, then we want to simply return the message…
+if we pass an object, then we want to do a stack trace, and then return the object + stack</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">var</span> error = {}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>set error type</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      error.type = _.isString(err.param) ? <span class="hljs-string">'invalid_request_error'</span> : <span class="hljs-string">'api_error'</span>
+
+      <span class="hljs-keyword">if</span> (error.type === <span class="hljs-string">'invalid_request_error'</span> &amp;&amp; res.statusCode === <span class="hljs-number">500</span>)
+        res.statusCode = <span class="hljs-number">400</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>set error message and stack trace</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (util.isError(err)) {
+        error.message = err.message
+      } <span class="hljs-keyword">else</span> {
+        _.extend(error, err)
+      }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>set status code for BadRequestError</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (_.isString(error.name) &amp;&amp; error.name === <span class="hljs-string">'BadRequestError'</span>) {
+        error.type = <span class="hljs-string">'invalid_request_error'</span>
+        res.statusCode = <span class="hljs-number">400</span>
+        <span class="hljs-keyword">delete</span> error.name
+      }
+
+      <span class="hljs-keyword">if</span> (settings.showStack)
+        error.stack = _.isUndefined(err.stack) ? <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(err.message).stack : err.stack</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>set error level</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">var</span> level = (res.statusCode &lt; <span class="hljs-number">500</span>) ? <span class="hljs-string">'warn'</span> : <span class="hljs-string">'error'</span>
+      logger[level](error)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>set error back to warning if it was warn
+logger level type = “warn”
+req.flash messages type = “warning”</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (level === <span class="hljs-string">'warn'</span>)
+        level = <span class="hljs-string">'warning'</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>if we have a mongoose validation err
+then we know to output all the errors</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (_.isObject(error.errors) &amp;&amp; !_.isEmpty(error.errors)) {
+        <span class="hljs-keyword">var</span> messages = []
+        _.each(error.errors, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(errMsg)</span> {</span>
+          <span class="hljs-keyword">if</span> (_.isString(errMsg.message))
+            messages.push(errMsg.message)
+        })
+        <span class="hljs-keyword">if</span> (!_.isEmpty(messages))
+          error.message = messages.join(<span class="hljs-string">' '</span>)
+      }
+
+      res.format({
+        text: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+          res.send(error.message)
+        },
+        html: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+          req.flash(level, error.message)
+          res.redirect(<span class="hljs-string">'back'</span>)
+        },
+        json: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+          res.json({ error: error })
+        }
+      })
+
+    })
+
+  }
+
+}
+
+exports[<span class="hljs-string">'@singleton'</span>] = <span class="hljs-literal">true</span>
+exports[<span class="hljs-string">'@require'</span>] = [ <span class="hljs-string">'igloo/logger'</span>, <span class="hljs-string">'igloo/settings'</span> ]</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
