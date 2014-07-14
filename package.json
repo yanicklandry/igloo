@@ -20,6 +20,7 @@
     "connect-redis": "~2.0.0",
     "express-session": "^1.2.1",
     "knex": "^0.6.13",
+    "mariasql": "^0.1.21",
     "merge-defaults": "^0.1.0",
     "mongoose": "~3.8.7",
     "mongoose-json-select": "^0.2.1",
