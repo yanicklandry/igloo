@@ -29,6 +29,7 @@
     "underscore": "~1.6.0",
     "update-notifier": "git://github.com/niftylettuce/update-notifier",
     "winston": "git://github.com/niftylettuce/winston",
+    "winston-hipchat": "^0.1.1",
     "winston-mongodb": "~0.4.3"
   }
 }
