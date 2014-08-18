@@ -1,6 +1,6 @@
 {
   "name": "igloo",
-  "version": "0.0.4-rc.8",
+  "version": "0.0.4-rc.9",
   "description": "Igloo is a lightweight, fast, and minimal framework for rapid development",
   "main": "./lib",
   "repository": {
@@ -19,17 +19,19 @@
     "commander": "^2.2.0",
     "connect-redis": "~2.0.0",
     "express-session": "^1.2.1",
-    "knex": "^0.6.13",
-    "mariasql": "^0.1.21",
     "merge-defaults": "^0.1.0",
-    "mongoose": "~3.8.7",
-    "mongoose-json-select": "^0.2.1",
-    "mysql": "^2.3.2",
     "to-camel-case": "^0.2.1",
     "underscore": "~1.6.0",
     "update-notifier": "git://github.com/niftylettuce/update-notifier",
     "winston": "git://github.com/niftylettuce/winston",
     "winston-hipchat": "^0.1.1",
     "winston-mongodb": "~0.4.3"
+  },
+  "devDependencies": {
+    "knex": "^0.6.13",
+    "mariasql": "^0.1.21",
+    "mongoose": "~3.8.7",
+    "mongoose-json-select": "^0.2.1",
+    "mysql": "^2.3.2"
   }
 }
