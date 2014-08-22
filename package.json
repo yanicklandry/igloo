@@ -22,7 +22,7 @@
     "merge-defaults": "^0.1.0",
     "to-camel-case": "^0.2.1",
     "underscore": "~1.6.0",
-    "update-notifier": "git://github.com/niftylettuce/update-notifier",
+    "update-notifier": "^0.2.0",
     "winston": "git://github.com/niftylettuce/winston",
     "winston-hipchat": "^0.1.1",
     "winston-mongodb": "~0.4.3"
