@@ -27,6 +27,7 @@ eskimo --help
 ## Contributors
 
 * Nick Baugh <niftylettuce@gmail.com>
+* Adnan Ibrišimbegović <adibih@gmail.com>
 
 
 ## Credits

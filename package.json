@@ -1,6 +1,6 @@
 {
   "name": "igloo",
-  "version": "0.0.4-rc.10",
+  "version": "0.0.4-rc.11",
   "description": "Igloo is a lightweight, fast, and minimal framework for rapid development",
   "main": "./lib",
   "repository": {
@@ -8,6 +8,16 @@
     "url": "git://github.com/niftylettuce/igloo.git"
   },
   "author": "Nick Baugh <niftylettuce@gmail.com>",
+  "contributors": [
+    {
+      "name": "Nick Baugh",
+      "email": "niftylettuce@gmail.com"
+    },
+    {
+      "name": "Adnan Ibrišimbegović",
+      "email": "adibih@gmail.com"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/niftylettuce/igloo/issues"
   },
