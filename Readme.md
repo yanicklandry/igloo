@@ -33,7 +33,7 @@ npm install -s igloo
 
 You will need to first `require('igloo')`, define a "config" component, and then use `electrolyte`'s `IoC.loader` method to load `igloo`'s components ([listed below][#components]).
 
-> **Note that `igloo` requires you to have defined a "config" component (since `igloo`'s "setting" component requires it as a dependency).  For example, [Eskimo][eskimo] defines a "config" component here.**
+> **Note that `igloo` requires you to have defined a "config" component (since `igloo`'s "setting" component requires it as a dependency).  For example, [Eskimo][eskimo] defines a "config" component [here][eskimo-default-config].**
 
 ```js
 // boot/config.js
