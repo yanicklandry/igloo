@@ -339,6 +339,11 @@ npm test
 ```
 
 
+## Conventions
+
+See [nifty-conventions][nifty-conventions] for code guidelines, general project requirements, and git workflow.
+
+
 ## Contributors
 
 * Nick Baugh <niftylettuce@gmail.com>
@@ -356,19 +361,16 @@ npm test
 [MIT](LICENSE)
 
 
+[nifty-conventions]: https://github.com/niftylettuce/nifty-conventions
 [npm-image]: http://img.shields.io/npm/v/igloo.svg?style=flat
 [npm-url]: https://npmjs.org/package/igloo
 [npm-downloads]: http://img.shields.io/npm/dm/igloo.svg?style=flat
-
 [travis-url]: http://travis-ci.org/niftylettuce/igloo
 [travis-image]: http://img.shields.io/travis/niftylettuce/igloo.svg?style=flat
-
 [depstat-url]: https://gemnasium.com/niftylettuce/igloo
 [depstat-image]: http://img.shields.io/gemnasium/niftylettuce/igloo.svg?style=flat
-
 [coveralls-image]: https://img.shields.io/coveralls/niftylettuce/igloo.svg?style=flat
 [coveralls-url]: https://coveralls.io/r/niftylettuce/igloo?branch=master
-
 [igloo-image]: https://filenode.s3.amazonaws.com/igloo.png
 [eskimo]: https://github.com/niftylettuce/eskimo
 [clevertech-image]: http://eskimo.io/img/clevertech.png
