@@ -31,17 +31,26 @@
     "express-session": "^1.2.1",
     "merge-defaults": "^0.1.0",
     "to-camel-case": "^0.2.1",
-    "underscore": "~1.6.0",
+    "underscore": "^1.6.0",
     "update-notifier": "^0.2.0",
     "winston": "git://github.com/niftylettuce/winston",
     "winston-hipchat": "^0.1.1",
     "winston-mongodb": "~0.4.3"
   },
   "devDependencies": {
+    "chai": "^1.9.1",
+    "istanbul": "^0.3.0",
     "knex": "^0.6.13",
     "mariasql": "^0.1.21",
+    "mocha": "^1.21.4",
     "mongoose": "~3.8.7",
     "mongoose-json-select": "^0.2.1",
     "mysql": "^2.3.2"
+  },
+  "scripts": {
+    "prepublish": "npm prune",
+    "test": "mocha --reporter spec --bail --check-leaks --require test/support/should test/",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks --require test/support/should  test/",
+    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks --require test/support/should test/"
   }
 }

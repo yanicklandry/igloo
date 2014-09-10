@@ -1,0 +1,9 @@
+{
+  "name": "example",
+  "version": "0.0.1",
+  "dependencies": {
+    "electrolyte": "0.0.4",
+    "express": "^4.9.0",
+    "winston-request-logger": "^1.0.5"
+  }
+}
