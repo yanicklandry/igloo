@@ -140,7 +140,7 @@ app.post('/user', createUser, errorHandler)
 
 function createUser(req, res, next) {
 
-  if (_.isString(req.body.name))
+  if (!_.isString(req.body.name))
     return next({
       param: 'name',
       message: 'User name is missing'
