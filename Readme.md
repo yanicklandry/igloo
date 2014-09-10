@@ -13,6 +13,20 @@
 
 Need to view documentation for a given component?  See [Components](#components) below.
 
+
+## Index
+
+* [Sponsor](#sponsor)
+* [Install](#install)
+* [Usage](#usage)
+* [Components](#components)
+* [Tests](#tests)
+* [Conventions](#conventions)
+* [Contributors](#contributors)
+* [Credits](#credits)
+* [License](#license)
+
+
 ## Sponsor
 
 [![Clevertech][clevertech-image]](http://clevertech.biz)
