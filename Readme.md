@@ -6,6 +6,7 @@
 [![Dependency Status][depstat-image]][depstat-url]
 [![NPM downloads][npm-downloads]][npm-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
+[![MIT License][license-image]][license-url]
 
 ![Igloo][igloo-image]
 
@@ -372,9 +373,11 @@ See [nifty-conventions][nifty-conventions] for code guidelines, general project 
 
 ## License
 
-[MIT](LICENSE)
+[MIT][license-url]
 
 
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-url]: LICENSE
 [nifty-conventions]: https://github.com/niftylettuce/nifty-conventions
 [npm-image]: http://img.shields.io/npm/v/igloo.svg?style=flat
 [npm-url]: https://npmjs.org/package/igloo
