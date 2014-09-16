@@ -402,5 +402,5 @@ See [nifty-conventions][nifty-conventions] for code guidelines, general project 
 [connect-redis]: https://github.com/visionmedia/connect-redis
 [eskimo-default-config]: https://github.com/niftylettuce/eskimo/blob/master/boot/config.js
 [update-notifier]: https://github.com/yeoman/update-notifier
-[gitter-url]: https://gitter.im/niftylettuce/igloo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
-[gitter-image]: https://badges.gitter.im/Join%20Chat.svg
+[gitter-url]: https://gitter.im/niftylettuce/igloo
+[gitter-image]: http://img.shields.io/badge/chat-online-brightgreen.svg?style=flat
