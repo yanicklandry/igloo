@@ -87,6 +87,41 @@ exports['@singleton'] = true
 
 ```
 
+You can have a `boot/local.js` with local settings if you need something unversioned (and load it by doing `$ export NODE_ENV=local`).
+
+```js
+// boot/local.js
+
+var path = require('path')
+var uploadsDir = path.join(__dirname, '..', 'uploads')
+var maxAge = 30 * 24 * 60 * 60 * 1000
+
+exports = module.exports = function() {
+
+  return {
+    local: {
+      uploadsDir: uploadsDir,
+      server: {
+        host: '0.0.0.0',
+        env: 'local',
+        port: 3003,
+      },
+      mongo: {
+        dbname: 'igloo-local',
+      },
+      redis: {
+        prefix: 'igloo-local',
+        maxAge: maxAge
+      }
+    }
+
+  }
+
+}
+
+exports['@singleton'] = true
+```
+
 
 ```js
 // app.js
