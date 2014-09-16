@@ -1,6 +1,16 @@
 language: node_js
 node_js:
-  - "0.10"
-  - "0.11"
-script: "npm run-script test-travis"
-after_script: "npm install coveralls@2 && cat ./coverage/lcov.info | coveralls"
+- '0.10'
+- '0.11'
+script: npm run-script test-travis
+after_script: npm install coveralls@2 && cat ./coverage/lcov.info | coveralls
+notifications:
+  webhooks:
+    urls:
+    - https://webhooks.gitter.im/e/84f254ceb77918b5a899
+    on_success: change
+    on_failure: always
+    on_start: false
+  hipchat:
+    rooms:
+      secure: SZAghgIWk6b8rpItdkjSY8UJtTW8E8AIYE5KkTGa9FiV0/q9kTHIAiqxBAQyIgF9IVsrO2NZdO9FrsiKjkSUPXbkonxtuqptl2c7bJLm2gUNmku2DfG0hn8TY50MXxGpiyEySoxcX4igQTzSZlJM81T0EI+L0PQJJXUKEJGuadY=

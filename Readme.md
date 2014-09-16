@@ -3,10 +3,10 @@
 
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
-[![Dependency Status][depstat-image]][depstat-url]
 [![NPM downloads][npm-downloads]][npm-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 [![MIT License][license-image]][license-url]
+[![Gitter][gitter-image]][gitter-url]
 
 ![Igloo][igloo-image]
 
@@ -384,8 +384,6 @@ See [nifty-conventions][nifty-conventions] for code guidelines, general project 
 [npm-downloads]: http://img.shields.io/npm/dm/igloo.svg?style=flat
 [travis-url]: http://travis-ci.org/niftylettuce/igloo
 [travis-image]: http://img.shields.io/travis/niftylettuce/igloo.svg?style=flat
-[depstat-url]: https://gemnasium.com/niftylettuce/igloo
-[depstat-image]: http://img.shields.io/gemnasium/niftylettuce/igloo.svg?style=flat
 [coveralls-image]: https://img.shields.io/coveralls/niftylettuce/igloo.svg?style=flat
 [coveralls-url]: https://coveralls.io/r/niftylettuce/igloo?branch=master
 [igloo-image]: https://filenode.s3.amazonaws.com/igloo.png
@@ -404,3 +402,5 @@ See [nifty-conventions][nifty-conventions] for code guidelines, general project 
 [connect-redis]: https://github.com/visionmedia/connect-redis
 [eskimo-default-config]: https://github.com/niftylettuce/eskimo/blob/master/boot/config.js
 [update-notifier]: https://github.com/yeoman/update-notifier
+[gitter-url]: https://gitter.im/niftylettuce/igloo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
+[gitter-image]: https://badges.gitter.im/Join%20Chat.svg

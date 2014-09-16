@@ -41,11 +41,9 @@
     "chai": "^1.9.1",
     "istanbul": "^0.3.0",
     "knex": "^0.6.13",
-    "mariasql": "^0.1.21",
     "mocha": "^1.21.4",
     "mongoose": "~3.8.7",
-    "mongoose-json-select": "^0.2.1",
-    "mysql": "^2.3.2"
+    "mongoose-json-select": "^0.2.1"
   },
   "scripts": {
     "prepublish": "npm prune",
