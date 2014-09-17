@@ -367,8 +367,6 @@ app.use(session(settings.session))
 
 For a full config example file, see [Eskimo's default config][eskimo-default-config].
 
-> TODO: Check into requiring a "local" component so Adnan's work is tested
-
 [View source](lib/boot/settings.js)
 
 
