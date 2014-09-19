@@ -165,6 +165,7 @@ app.listen(settings.port, function() {
 
 ## Components
 
+* [email](#email)
 * [error-handler](#error-handler)
 * [knex](#knex)
 * [logger](#logger)
@@ -174,6 +175,31 @@ app.listen(settings.port, function() {
 * [sessions](#sessions)
 * [settings](#settings)
 * [update-notifier](#update-notifier)
+
+### email
+
+> Returns a function which accepts templateName, locals, headers, transport, and callback arguments.  This component uses
+
+[View source](lib/boot/email)
+
+```js
+// example - email
+
+// TODO: finish this!
+
+// mention that transport defaults to settings.email.transport
+
+// mention that headers inherits settings.email.headers
+
+// but only if you don't set `headers.useDefaults: false`
+
+// note that is also uses `settings.email.templates` object
+// which can have `dir` string and `options` object for node email-templates pkg
+
+// also document about having `transport` of `settings.email.transport` be an
+// actual transporter already pre-created (possibly with plugins like html-to-text)
+
+```
 
 ### error-handler
 
