@@ -180,7 +180,7 @@ app.listen(settings.port, function() {
 
 > Returns a function which accepts templateName, locals, headers, transport, and callback arguments.  This component uses
 
-[View source](lib/boot/email)
+[View source](lib/boot/email.js)
 
 ```js
 // example - email
